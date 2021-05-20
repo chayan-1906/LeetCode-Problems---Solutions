@@ -20,7 +20,7 @@ Both num1 and num2 do not contain any leading zero, except the number 0 itself.
 import java.math.BigInteger;
 class Solution {
     public String multiply(String num1, String num2) {
-String result;
+        String result;
         BigInteger bigInteger1 = new BigInteger ( num1 );
         BigInteger bigInteger2 = new BigInteger ( num2 );
         BigInteger result_int = bigInteger1.multiply ( bigInteger2 );
