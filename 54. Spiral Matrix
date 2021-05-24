@@ -1,0 +1,42 @@
+/* https://leetcode.com/problems/spiral-matrix/
+Given an m x n matrix, return all elements of the matrix in spiral order.
+
+Example 1:
+Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+Output: [1,2,3,6,9,8,7,4,5]
+
+Example 2:
+Input: matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+Output: [1,2,3,4,8,12,11,10,9,5,6,7]
+
+Constraints:
+m == matrix.length
+n == matrix[i].length
+1 <= m, n <= 10
+-100 <= matrix[i][j] <= 100
+*/
+
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> list = new ArrayList<> (  );
+        if (matrix.length==0)
+            return list;
+        int row_first = 0;
+        int row_last = matrix.length - 1;
+        int col_first = 0;
+        int col_last = matrix[0].length - 1;
+        while (row_first <= row_last && col_first <= col_last) {
+            for (int col = col_first; col <= col_last; col++) list.add ( matrix[row_first][col] );
+            for (int row = row_first + 1; row <= row_last; row++) list.add ( matrix[row][col_last] );
+            if (row_first < row_last && col_first < col_last) {
+                for (int col = col_last - 1; col >= col_first; col--) list.add ( matrix[row_last][col] );
+                for (int row = row_last - 1; row > row_first; row--) list.add ( matrix[row][col_first] );
+            }
+            row_first++;
+            row_last--;
+            col_first++;
+            col_last--;
+        }
+        return list;
+    }
+}
