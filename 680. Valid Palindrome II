@@ -1,0 +1,45 @@
+/* https://leetcode.com/problems/valid-palindrome-ii/
+Given a non-empty string s, you may delete at most one character. Judge whether you can make it a palindrome.
+
+Example 1:
+Input: "aba"
+Output: True
+
+Example 2:
+Input: "abca"
+Output: True
+Explanation: You could delete the character 'c'.
+
+Note: The string will only contain lowercase characters a-z. The maximum length of the string is 50000.
+*/
+
+class Solution {
+    private static boolean check(String s, int p1, int p2) {
+        while (p1<=p2) {
+            if (s.charAt ( p1 ) != s.charAt ( p2 ))
+                return false;
+            p1++;
+            p2--;
+        }
+        return true;
+    }
+
+    public static boolean validPalindrome(String s) {
+        int p1 = 0;
+        int p2 = s.length () - 1;
+        while (p1<=p2) {
+            if (s.charAt ( p1 ) != s.charAt ( p2 )) {
+                // 2 cases
+                // delete p1 check for s[p1+1...p2]
+                // delete p2 check for s[p1...p2-1]
+                if (check ( s, p1+1, p2 ) || check ( s, p1, p2-1 ))
+                    return true;
+                else    // after deleting one character we are unable to delete obtain a palindrome
+                    return false;
+            }
+            p1++;
+            p2--;
+        }
+        return true;
+    }
+}
