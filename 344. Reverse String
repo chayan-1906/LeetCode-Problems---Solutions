@@ -1,0 +1,28 @@
+/* https://leetcode.com/problems/reverse-string/
+Write a function that reverses a string. The input string is given as an array of characters s.
+
+Example 1:
+Input: s = ["h","e","l","l","o"]
+Output: ["o","l","l","e","h"]
+
+Example 2:
+Input: s = ["H","a","n","n","a","h"]
+Output: ["h","a","n","n","a","H"]
+
+Constraints:
+1 <= s.length <= 10^5
+s[i] is a printable ascii character.
+*/
+
+class Solution {
+    public void reverseString(char[] s) {
+        int starting_index = 0;
+        int ending_index = s.length - 1;
+        while (starting_index < ending_index) {
+            char reverse = s[starting_index];
+            s[starting_index++] = s[ending_index];
+            s[ending_index--] = reverse;
+        }
+        
+    }
+}
