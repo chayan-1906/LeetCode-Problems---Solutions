@@ -16,10 +16,10 @@ Constraints:
 class Solution {
     public int getSum(int a, int b) {
         while (b!=0) {
-			int c = a & b;
-			a = a ^ b;
-			b = c << 1;
-		}
-		return a;
+		int c = a & b;  // c = a AND b
+		a = a ^ b;  // a = a XOR b
+		b = c << 1; // b = c LEFT SHIFT 1, b * 2 ^ c
+	}
+	return a;
     }
 }
