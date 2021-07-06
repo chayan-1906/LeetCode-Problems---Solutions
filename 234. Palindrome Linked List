@@ -1,0 +1,63 @@
+/* https://leetcode.com/problems/palindrome-linked-list/
+Given the head of a singly linked list, return true if it is a palindrome.
+
+Example 1:
+Input: head = [1,2,2,1]
+Output: true
+
+Example 2:
+Input: head = [1,2]
+Output: false
+
+Constraints:
+The number of nodes in the list is in the range [1, 105].
+0 <= Node.val <= 9
+*/
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if (head==null || head.next==null)
+			return true;
+		ListNode startPtr = head;
+		List<Integer> integerList1 = new ArrayList<> (  );
+		List<Integer> integerList2 = new ArrayList<> (  );
+		int noOfNodes = 0;
+		while (startPtr!=null) {
+			noOfNodes++;
+			startPtr = startPtr.next;
+		}
+		startPtr = head;
+		if (noOfNodes%2==0) {
+			for (int i = 0; i < noOfNodes; i++) {
+                if (i < noOfNodes/2)
+				    integerList1.add ( startPtr.val );
+                else if (i >= noOfNodes/2)
+                    integerList2.add ( startPtr.val );
+				startPtr = startPtr.next;
+			}
+		} else {
+			for (int i = 0; i < noOfNodes; i++) {
+                if (i < noOfNodes/2)
+				    integerList1.add ( startPtr.val );
+                else if (i > noOfNodes/2)
+                    integerList2.add ( startPtr.val );
+				startPtr = startPtr.next;
+			}
+		}
+		System.out.println ( noOfNodes );
+		System.out.println ( integerList1 );
+		Collections.reverse ( integerList2 );
+        System.out.println ( integerList2 );
+		return integerList1.equals ( integerList2 );
+    }
+}
