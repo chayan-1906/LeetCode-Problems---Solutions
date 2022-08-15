@@ -31,8 +31,7 @@ Both l1 and l2 are sorted in non-decreasing order.
  * }
  */
 class Solution {
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        ListNode p = l1, q = l2;
+    public ListNode mergeTwoLists(ListNode p, ListNode q) {
         if (p==null)
             return q;
         else if (q==null)
