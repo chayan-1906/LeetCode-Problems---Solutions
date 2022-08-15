@@ -33,20 +33,19 @@ It is guaranteed that the list represents a number that does not have leading ze
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode head = new ListNode ( 0 );
-        ListNode p = l1, q = l2, current_node = head;
+        ListNode currentNode = head;
         int carry = 0;
-        while (p != null || q != null) {
-            int x = (p != null) ? p.val : 0;
-            int y = (q != null) ? q.val : 0;
+        while (list1 != null || list2 != null) {
+            int x = list1 != null ? list1.val : 0;
+            int y = list2 != null ? list2.val : 0;
             int sum = carry + x + y;
             carry = sum / 10;
-            current_node.next = new ListNode(sum % 10);
-            current_node = current_node.next;
-            if (p != null) p = p.next;
-            if (q != null) q = q.next;
+            currentNode.next = new ListNode ( sum % 10 );
+            currentNode = currentNode.next;
+            if (list1 != null) list1 = list1.next;
+            if (list2 != null) list2 = list2.next;
         }
-        if (carry > 0)
-            current_node.next = new ListNode ( carry );
+        if (carry > 0) head.next = new ListNode ( carry );
         return head.next;
     }
 }
