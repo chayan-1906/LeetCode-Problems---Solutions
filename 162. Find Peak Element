@@ -20,6 +20,7 @@ Constraints:
 nums[i] != nums[i + 1] for all valid i.
 */
 
+O(n)
 class Solution {
     public int findPeakElement(int[] nums) {
         int largestElementIndex = 0;
@@ -27,5 +28,21 @@ class Solution {
 			if (nums[ largestElementIndex ] < nums[ i ]) largestElementIndex = i;
 		}
 		return largestElementIndex;
+    }
+}
+
+OR,
+
+O(logn)
+class Solution {
+    public int findPeakElement(int[] nums) {
+        int first = 0;
+		int last = nums.length - 1;
+		while (first < last) {
+			int mid = (first + (last - 1)) / 2;
+			if (nums[ mid ] > nums[ mid + 1 ]) last = mid;
+			else first = mid + 1;
+		}
+		return first;
     }
 }
