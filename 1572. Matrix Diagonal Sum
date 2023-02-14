@@ -44,3 +44,18 @@ class Solution {
         return sum;
     }
 }
+
+class Solution {
+    public int diagonalSum(int[][] mat) {
+        int primaryDiagonalSum = 0;
+		int secondaryDiagonalSum = 0;
+		for (int i = 0; i < mat.length; i++) {
+			primaryDiagonalSum += mat[ i ][ i ];
+			secondaryDiagonalSum += mat[ i ][ mat.length - i - 1 ];
+			if (mat.length % 2 != 0 && i == mat.length / 2 && i == mat[ i ].length / 2) {
+				secondaryDiagonalSum -= mat[ i ][ i ];
+			}
+		}
+		return primaryDiagonalSum + secondaryDiagonalSum;
+    }
+}
