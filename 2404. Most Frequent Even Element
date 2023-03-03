@@ -1,0 +1,53 @@
+/** https://leetcode.com/problems/most-frequent-even-element/
+Given an integer array nums, return the most frequent even element.
+If there is a tie, return the smallest one. If there is no such element, return -1.
+
+Example 1:
+Input: nums = [0,1,2,2,4,4,1]
+Output: 2
+Explanation:
+The even elements are 0, 2, and 4. Of these, 2 and 4 appear the most.
+We return the smallest one, which is 2.
+
+Example 2:
+Input: nums = [4,4,4,9,2,4]
+Output: 4
+Explanation: 4 is the even element appears the most.
+
+Example 3:
+Input: nums = [29,47,21,41,13,37,25,7]
+Output: -1
+Explanation: There is no even element.
+
+Constraints:
+1 <= nums.length <= 2000
+0 <= nums[i] <= 10⁵
+*/
+
+import java.util.*;
+import java.util.Map.Entry;
+
+class Solution {
+    public int mostFrequentEven(int[] nums) {
+        HashMap<Integer, Integer> hashMap = new HashMap<> ( );
+		for (Integer integer : nums) {
+            if(integer % 2 == 0)
+                hashMap.put ( integer, hashMap.getOrDefault ( integer, 0 ) + 1 );
+        }
+		int maxValue = Integer.MIN_VALUE;
+		for (Entry<Integer, Integer> entry : hashMap.entrySet ( )) {
+			Integer key = entry.getKey ( );
+			Integer value = entry.getValue ( );
+			maxValue = Math.max ( maxValue, value );
+		}
+		ArrayList<Integer> arrayList = new ArrayList<> ( );
+		for (Entry<Integer, Integer> entry : hashMap.entrySet ( )) {
+			Integer key = entry.getKey ( );
+			Integer value = entry.getValue ( );
+			if (key % 2 == 0 && value == maxValue) arrayList.add ( key );
+		}
+        System.out.println(arrayList);
+		if (arrayList.isEmpty ( )) arrayList.add ( -1 );
+		return arrayList.size ( ) > 1 ? Collections.min ( arrayList ) : arrayList.get ( 0 );
+    }
+}
