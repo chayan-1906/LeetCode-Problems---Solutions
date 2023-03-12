@@ -50,3 +50,22 @@ class Solution {
 			return -1;
     }
 }
+
+class Solution {
+    public int findLucky(int[] arr) {
+        HashMap<Integer, Integer> hashMap = new HashMap<> ( );
+		for (Integer integer : arr)
+			hashMap.put ( integer, hashMap.getOrDefault ( integer, 0 ) + 1 );
+		int result = -1;
+		for (Map.Entry<Integer, Integer> entry : hashMap.entrySet ( )) {
+			Integer key = entry.getKey ( );
+			Integer value = entry.getValue ( );
+			if (Objects.equals ( key, value )) {
+				if (Objects.equals ( key, value )) {
+					result = Math.max ( result, key );
+				}
+			}
+		}
+		return result;
+    }
+}
