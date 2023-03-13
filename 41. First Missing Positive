@@ -28,3 +28,17 @@ class Solution {
         return smallest;
     }
 }
+
+class Solution {
+    public int firstMissingPositive(int[] arr) {
+        Arrays.sort ( arr );
+		LinkedHashSet<Integer> hashSet = new LinkedHashSet<> ( );
+		for (int integer : arr) {
+			if (integer > 0) hashSet.add ( integer );
+		}
+		for (int i = 0; i < hashSet.size ( ); i++) {
+			if (!hashSet.contains ( i + 1 )) return i + 1;
+		}
+		return hashSet.size ( ) + 1;
+    }
+}
