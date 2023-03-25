@@ -1,0 +1,47 @@
+/** https://leetcode.com/problems/reverse-vowels-of-a-string/submissions/
+Given a string s, reverse only all the vowels in the string and return it.
+The vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in both lower and upper cases, more than once.
+
+Example 1:
+Input: s = "hello"
+Output: "holle"
+
+Example 2:
+Input: s = "leetcode"
+Output: "leotcede"
+
+Constraints:
+1 <= s.length <= 3 * 10⁵
+s consist of printable ASCII characters.
+*/
+
+class Solution {
+    public String reverseVowels(String s) {
+        StringBuilder stringBuilder = new StringBuilder ( s );
+		int i = 0;
+		int j = stringBuilder.length ( ) - 1;
+		while (i < stringBuilder.length ( ) && i < j) {
+			char ithCharacter = stringBuilder.charAt ( i );
+			char jthCharacter = stringBuilder.charAt ( j );
+			boolean ithIsVowel = ithCharacter == 'a' || ithCharacter == 'A'
+					|| ithCharacter == 'e' || ithCharacter == 'E'
+					|| ithCharacter == 'i' || ithCharacter == 'I'
+					|| ithCharacter == 'o' || ithCharacter == 'O'
+					|| ithCharacter == 'u' || ithCharacter == 'U';
+			boolean jthIsVowel = jthCharacter == 'a' || jthCharacter == 'A'
+					|| jthCharacter == 'e' || jthCharacter == 'E'
+					|| jthCharacter == 'i' || jthCharacter == 'I'
+					|| jthCharacter == 'o' || jthCharacter == 'O'
+					|| jthCharacter == 'u' || jthCharacter == 'U';
+			if (ithIsVowel && jthIsVowel) {
+				char temp = ithCharacter;
+				stringBuilder.setCharAt ( i, jthCharacter );
+				stringBuilder.setCharAt ( j, temp );
+				i++;
+				j--;
+			} else if (!ithIsVowel) i++;
+			else j--;
+		}
+		return stringBuilder.toString ( );
+    }
+}
