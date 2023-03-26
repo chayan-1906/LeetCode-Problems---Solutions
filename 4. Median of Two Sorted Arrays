@@ -35,5 +35,44 @@ class Solution {
             median = (nums[ (length-1) / 2 ] + nums[ ((length-1) / 2) + 1 ]) / 2.0f;
         return median;
     }
-    
+}
+
+class Solution {
+    public static double findMedianSortedArrays(int[] array1, int[] array2) {
+		if (array1.length == 0 && array2.length == 0) return 0;
+		if (array1.length == 0) {
+			if (array2.length % 2 == 0)
+				return (double) (array2[ array2.length / 2 - 1 ] + array2[ array2.length / 2 ]) / 2;
+			else return array2[ array2.length / 2 ];
+		} else if (array2.length == 0) {
+			if (array1.length % 2 == 0)
+				return (double) (array1[ array1.length / 2 - 1 ] + array1[ array1.length / 2 ]) / 2;
+			else return array1[ array1.length / 2 ];
+		}
+		int[] nums1 = array1, nums2 = array2;
+		if (array1.length > array2.length) {
+			int[] temp = nums1;
+			nums1 = nums2;
+			nums2 = temp;
+		}
+		int left1 = 0, right1 = nums1.length;
+		int n1 = nums1.length, n2 = nums2.length;
+		while (left1 <= right1) {
+			int i1 = left1 + (right1 - left1) / 2;
+			int i2 = (n1 + n2 + 1) / 2 - i1;
+
+			int min1 = (i1 == n1) ? Integer.MAX_VALUE : nums1[ i1 ];
+			int max1 = (i1 == 0) ? Integer.MIN_VALUE : nums1[ i1 - 1 ];
+			int min2 = (i2 == n2) ? Integer.MAX_VALUE : nums2[ i2 ];
+			int max2 = (i2 == 0) ? Integer.MIN_VALUE : nums2[ i2 - 1 ];
+
+			if (max1 <= min2 && max2 <= min1) {
+				if ((n1 + n2) % 2 == 0) {
+					return ((double) Math.max ( max1, max2 ) + (double) Math.min ( min1, min2 )) / 2;
+				} else return (double) Math.max ( max1, max2 );
+			} else if (max1 > min2) right1 = i1 - 1;
+			else left1 = i1 + 1;
+		}
+		return -1;
+	}
 }
