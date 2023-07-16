@@ -1,0 +1,45 @@
+/** https://leetcode.com/problems/spiral-matrix-ii/
+Given a positive integer n, generate an n x n matrix filled with elements from 1 to n2 in spiral order.
+
+Example 1:
+Input: n = 3
+Output: [[1,2,3],[8,9,4],[7,6,5]]
+
+Example 2:
+Input: n = 1
+Output: [[1]]
+
+Constraints:
+1 <= n <= 20
+*/
+
+class Solution {
+    public int[][] generateMatrix(int n) {
+        int[][] spiralMatrix = new int[n][n];
+        int number = 1;
+        int lowR = 0, highR = n - 1;
+        int lowC = 0, highC = n - 1;
+        for (int i = 0; i < n; i++) {
+            // first row : left -> right
+            for (int j = lowC; j <= highC; j++) spiralMatrix[lowR][j] = number++;
+            lowR++;
+
+            // last col : top -> bottom
+            for (int j = lowR; j <= highR; j++) spiralMatrix[j][highC] = number++;
+            highC--;
+
+            // last row : right -> left
+            if (lowR <= highR) {
+                for (int j = highC; j >= lowC; j--) spiralMatrix[highR][j] = number++;
+                highR--;
+            }
+
+            // first col : bottom -> top
+            if (lowC <= highC) {
+                for (int j = highR; j >= lowR; j--) spiralMatrix[j][lowC] = number++;
+                lowC++;
+            }
+        }
+        return spiralMatrix;
+    }
+}
